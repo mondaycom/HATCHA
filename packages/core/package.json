@@ -1,0 +1,41 @@
+{
+  "name": "@gotcha-captcha/core",
+  "private": true,
+  "version": "0.1.0",
+  "description": "Challenge generation and cryptographic verification for GOTCHA",
+  "type": "module",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    }
+  },
+  "sideEffects": false,
+  "keywords": ["captcha", "reverse-captcha", "ai-agent", "verification", "hmac", "challenge", "gotcha"],
+  "files": ["dist"],
+  "scripts": {
+    "build": "tsup",
+    "dev": "tsup --watch",
+    "typecheck": "tsc --noEmit",
+    "clean": "rm -rf dist",
+    "test": "vitest run"
+  },
+  "devDependencies": {
+    "tsup": "^8",
+    "typescript": "^5.7"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/maypaz/gotcha.git",
+    "directory": "packages/core"
+  },
+  "homepage": "https://github.com/maypaz/gotcha#readme",
+  "bugs": {
+    "url": "https://github.com/maypaz/gotcha/issues"
+  },
+  "license": "MIT"
+}

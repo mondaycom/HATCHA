@@ -1,0 +1,633 @@
+/* ================================================================= */
+/*  GOTCHA — Reverse CAPTCHA for Agents                              */
+/*  @gotcha-captcha/react/styles.css                                  */
+/*                                                                    */
+/*  Override any --gotcha-* variable on a parent element to theme.    */
+/* ================================================================= */
+
+/* ---- Default theme (dark) ---- */
+[data-gotcha-theme="dark"],
+[data-gotcha-theme="auto"] {
+  --gotcha-bg: #060b18;
+  --gotcha-fg: #e4eaf6;
+  --gotcha-muted: #6b7fa0;
+  --gotcha-surface: #0c1222;
+  --gotcha-surface-raised: #111a2e;
+  --gotcha-border: rgba(100, 160, 255, 0.08);
+  --gotcha-border-strong: rgba(100, 160, 255, 0.14);
+  --gotcha-accent: #3b82f6;
+  --gotcha-accent-light: #60a5fa;
+  --gotcha-accent-dim: #2563eb;
+  --gotcha-accent-bg: rgba(59, 130, 246, 0.07);
+  --gotcha-success: #22c55e;
+  --gotcha-danger: #ef4444;
+  --gotcha-font-mono: "Geist Mono", ui-monospace, "Cascadia Code", "Fira Code", monospace;
+  --gotcha-font-sans: "Geist", "Inter", system-ui, -apple-system, sans-serif;
+  --gotcha-glow: rgba(59, 130, 246, 0.12);
+  --gotcha-glow-strong: rgba(59, 130, 246, 0.25);
+  --gotcha-radius: 1rem;
+  --gotcha-radius-lg: 1.25rem;
+}
+
+[data-gotcha-theme="light"] {
+  --gotcha-bg: #f8faff;
+  --gotcha-fg: #0f1729;
+  --gotcha-muted: #7b8ba8;
+  --gotcha-surface: #ffffff;
+  --gotcha-surface-raised: #f0f4ff;
+  --gotcha-border: rgba(30, 64, 175, 0.08);
+  --gotcha-border-strong: rgba(30, 64, 175, 0.14);
+  --gotcha-accent: #2563eb;
+  --gotcha-accent-light: #3b82f6;
+  --gotcha-accent-dim: #1d4ed8;
+  --gotcha-accent-bg: rgba(37, 99, 235, 0.05);
+  --gotcha-success: #16a34a;
+  --gotcha-danger: #dc2626;
+  --gotcha-font-mono: "Geist Mono", ui-monospace, "Cascadia Code", "Fira Code", monospace;
+  --gotcha-font-sans: "Geist", "Inter", system-ui, -apple-system, sans-serif;
+  --gotcha-glow: rgba(37, 99, 235, 0.08);
+  --gotcha-glow-strong: rgba(37, 99, 235, 0.18);
+  --gotcha-radius: 1rem;
+  --gotcha-radius-lg: 1.25rem;
+}
+
+@media (prefers-color-scheme: light) {
+  [data-gotcha-theme="auto"] {
+    --gotcha-bg: #f8faff;
+    --gotcha-fg: #0f1729;
+    --gotcha-muted: #7b8ba8;
+    --gotcha-surface: #ffffff;
+    --gotcha-surface-raised: #f0f4ff;
+    --gotcha-border: rgba(30, 64, 175, 0.08);
+    --gotcha-border-strong: rgba(30, 64, 175, 0.14);
+    --gotcha-accent: #2563eb;
+    --gotcha-accent-light: #3b82f6;
+    --gotcha-accent-dim: #1d4ed8;
+    --gotcha-accent-bg: rgba(37, 99, 235, 0.05);
+    --gotcha-success: #16a34a;
+    --gotcha-danger: #dc2626;
+    --gotcha-font-mono: "Geist Mono", ui-monospace, "Cascadia Code", "Fira Code", monospace;
+    --gotcha-font-sans: "Geist", "Inter", system-ui, -apple-system, sans-serif;
+    --gotcha-glow: rgba(37, 99, 235, 0.08);
+    --gotcha-glow-strong: rgba(37, 99, 235, 0.18);
+    --gotcha-radius: 1rem;
+    --gotcha-radius-lg: 1.25rem;
+  }
+}
+
+/* ---- Keyframes ---- */
+
+@keyframes gotcha-overlay-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes gotcha-modal-in {
+  from { opacity: 0; transform: scale(0.96) translateY(16px); }
+  to   { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+@keyframes gotcha-glow {
+  0%, 100% {
+    box-shadow:
+      0 0 0 1px var(--gotcha-border),
+      0 0 32px var(--gotcha-glow),
+      0 20px 60px -12px rgba(0, 0, 0, 0.25);
+  }
+  50% {
+    box-shadow:
+      0 0 0 1px var(--gotcha-border-strong),
+      0 0 48px var(--gotcha-glow-strong),
+      0 20px 60px -12px rgba(0, 0, 0, 0.25);
+  }
+}
+
+@keyframes gotcha-success-glow {
+  from {
+    box-shadow:
+      0 0 0 1px rgba(34, 197, 94, 0.4),
+      0 0 48px rgba(34, 197, 94, 0.3),
+      0 20px 60px -12px rgba(0, 0, 0, 0.25);
+  }
+  to {
+    box-shadow:
+      0 0 0 1px rgba(34, 197, 94, 0.2),
+      0 0 64px rgba(34, 197, 94, 0.12),
+      0 20px 60px -12px rgba(0, 0, 0, 0.25);
+  }
+}
+
+@keyframes gotcha-shake {
+  0%, 100% { transform: translateX(0); }
+  20%      { transform: translateX(-5px); }
+  40%      { transform: translateX(5px); }
+  60%      { transform: translateX(-3px); }
+  80%      { transform: translateX(3px); }
+}
+
+@keyframes gotcha-fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes gotcha-fade-up {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes gotcha-checkmark-pop {
+  0%   { transform: scale(0) rotate(-20deg); opacity: 0; }
+  50%  { transform: scale(1.35) rotate(5deg); }
+  100% { transform: scale(1) rotate(0deg); opacity: 1; }
+}
+
+@keyframes gotcha-shimmer {
+  0%   { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+@keyframes gotcha-pulse-ring {
+  0%   { transform: scale(0.95); opacity: 1; }
+  70%  { transform: scale(1.15); opacity: 0; }
+  100% { transform: scale(1.15); opacity: 0; }
+}
+
+/* ---- Overlay ---- */
+
+.gotcha-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  background: rgba(4, 8, 20, 0.65);
+  backdrop-filter: blur(16px) saturate(1.4);
+  -webkit-backdrop-filter: blur(16px) saturate(1.4);
+  animation: gotcha-overlay-in 250ms ease;
+  font-family: var(--gotcha-font-sans);
+}
+
+/* ---- Modal card ---- */
+
+.gotcha-modal {
+  position: relative;
+  width: 100%;
+  max-width: 460px;
+  border: 1px solid var(--gotcha-border-strong);
+  border-radius: var(--gotcha-radius-lg);
+  padding: 1.75rem;
+  background: var(--gotcha-surface);
+  backdrop-filter: blur(32px) saturate(1.5);
+  -webkit-backdrop-filter: blur(32px) saturate(1.5);
+  animation:
+    gotcha-modal-in 400ms cubic-bezier(0.16, 1, 0.3, 1),
+    gotcha-glow 5s ease-in-out infinite;
+  overflow: hidden;
+}
+
+.gotcha-modal::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(
+    160deg,
+    rgba(59, 130, 246, 0.2) 0%,
+    transparent 40%,
+    transparent 60%,
+    rgba(59, 130, 246, 0.08) 100%
+  );
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
+.gotcha-modal.verified {
+  border-color: rgba(34, 197, 94, 0.3);
+  animation: gotcha-success-glow 900ms ease both;
+}
+
+.gotcha-modal.verified::before {
+  background: linear-gradient(
+    160deg,
+    rgba(34, 197, 94, 0.3) 0%,
+    transparent 50%,
+    rgba(34, 197, 94, 0.1) 100%
+  );
+}
+
+/* ---- Header ---- */
+
+.gotcha-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+.gotcha-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--gotcha-accent-light);
+  font-family: var(--gotcha-font-sans);
+}
+
+.gotcha-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.85rem;
+  height: 1.85rem;
+  border-radius: 0.55rem;
+  background: var(--gotcha-accent-bg);
+  border: 1px solid color-mix(in srgb, var(--gotcha-accent) 20%, transparent);
+  font-size: 0.72rem;
+  font-family: var(--gotcha-font-mono);
+  font-weight: 800;
+  color: var(--gotcha-accent-light);
+}
+
+/* ---- Refresh button ---- */
+
+.gotcha-refresh {
+  width: 2.1rem;
+  height: 2.1rem;
+  border-radius: 0.6rem;
+  border: 1px solid var(--gotcha-border);
+  background: transparent;
+  color: var(--gotcha-muted);
+  font-size: 1.15rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: color 200ms, border-color 200ms, background 200ms, transform 400ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.gotcha-refresh:hover:not(:disabled) {
+  color: var(--gotcha-accent-light);
+  border-color: color-mix(in srgb, var(--gotcha-accent) 40%, transparent);
+  background: var(--gotcha-accent-bg);
+  transform: rotate(180deg);
+}
+
+.gotcha-refresh:disabled {
+  opacity: 0.25;
+  cursor: default;
+}
+
+/* ---- Timer ---- */
+
+.gotcha-timer-track {
+  height: 3px;
+  border-radius: 999px;
+  background: var(--gotcha-border);
+  overflow: hidden;
+  margin-bottom: 0.4rem;
+}
+
+.gotcha-timer-fill {
+  height: 100%;
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--gotcha-accent-dim), var(--gotcha-accent), var(--gotcha-accent-light));
+  background-size: 200% 100%;
+  animation: gotcha-shimmer 3s linear infinite;
+  transition: width 80ms linear;
+}
+
+.gotcha-time-text {
+  font-size: 0.68rem;
+  font-family: var(--gotcha-font-mono);
+  color: var(--gotcha-muted);
+  margin: 0 0 0.9rem;
+  letter-spacing: 0.03em;
+}
+
+/* ---- Description ---- */
+
+.gotcha-desc {
+  font-size: 0.875rem;
+  color: var(--gotcha-fg);
+  line-height: 1.6;
+  margin: 0 0 0.85rem;
+  font-family: var(--gotcha-font-sans);
+}
+
+/* ---- Challenge prompt box ---- */
+
+.gotcha-prompt {
+  border: 1px solid var(--gotcha-border);
+  border-radius: var(--gotcha-radius);
+  padding: 0.9rem 1rem;
+  background: color-mix(in srgb, var(--gotcha-bg) 60%, transparent);
+  margin-bottom: 1.1rem;
+  max-height: 140px;
+  overflow-y: auto;
+  position: relative;
+}
+
+.gotcha-prompt::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, color-mix(in srgb, var(--gotcha-accent) 15%, transparent), transparent);
+}
+
+.gotcha-prompt code {
+  font-family: var(--gotcha-font-mono);
+  font-size: 0.78rem;
+  line-height: 1.7;
+  color: var(--gotcha-accent-light);
+  word-break: break-all;
+}
+
+/* ---- "I AM A ROBOT" checkbox dock ---- */
+
+.gotcha-robot-dock {
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 0.9rem;
+  min-height: 3.2rem;
+  border-radius: var(--gotcha-radius);
+}
+
+.gotcha-robot-check {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  width: 100%;
+  padding: 0.8rem 1rem;
+  border: 1.5px solid var(--gotcha-border-strong);
+  border-radius: var(--gotcha-radius);
+  background: color-mix(in srgb, var(--gotcha-surface-raised) 50%, transparent);
+  cursor: pointer;
+  user-select: none;
+  font-family: var(--gotcha-font-sans);
+  transition: border-color 250ms, background 250ms, box-shadow 250ms, transform 200ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.gotcha-robot-check:hover:not(:disabled) {
+  border-color: color-mix(in srgb, var(--gotcha-accent) 45%, transparent);
+  background: color-mix(in srgb, var(--gotcha-accent) 5%, transparent);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 24px var(--gotcha-glow);
+}
+
+.gotcha-robot-check:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.gotcha-robot-check.success {
+  border-color: rgba(34, 197, 94, 0.4);
+  background: color-mix(in srgb, var(--gotcha-success) 6%, transparent);
+  box-shadow: 0 0 24px rgba(34, 197, 94, 0.1);
+  cursor: default;
+}
+
+.gotcha-robot-check.fail {
+  border-color: var(--gotcha-danger);
+  animation: gotcha-shake 400ms ease;
+}
+
+.gotcha-checkbox {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.7rem;
+  height: 1.7rem;
+  border-radius: 0.45rem;
+  border: 2px solid var(--gotcha-border-strong);
+  background: transparent;
+  transition: border-color 300ms, background 300ms, transform 300ms, box-shadow 300ms;
+  flex-shrink: 0;
+}
+
+.gotcha-checkbox.checked {
+  border-color: var(--gotcha-success);
+  background: var(--gotcha-success);
+  transform: scale(1.05);
+  box-shadow: 0 0 16px rgba(34, 197, 94, 0.35);
+}
+
+.gotcha-checkmark {
+  color: #fff;
+  font-size: 1rem;
+  font-weight: 900;
+  line-height: 1;
+  animation: gotcha-checkmark-pop 400ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.gotcha-robot-label {
+  font-size: 0.88rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: var(--gotcha-fg);
+}
+
+.gotcha-robot-aside {
+  margin-left: auto;
+  font-size: 0.66rem;
+  font-family: var(--gotcha-font-mono);
+  font-weight: 500;
+  color: var(--gotcha-muted);
+  font-style: italic;
+  letter-spacing: 0.02em;
+}
+
+/* ---- Input row ---- */
+
+.gotcha-input-row {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 0.9rem;
+}
+
+.gotcha-input {
+  flex: 1;
+  font-family: var(--gotcha-font-mono);
+  font-size: 0.85rem;
+  padding: 0.65rem 0.9rem;
+  border: 1.5px solid var(--gotcha-border-strong);
+  border-radius: var(--gotcha-radius);
+  background: color-mix(in srgb, var(--gotcha-bg) 60%, transparent);
+  color: var(--gotcha-fg);
+  outline: none;
+  transition: border-color 200ms, box-shadow 200ms;
+}
+
+.gotcha-input:focus {
+  border-color: color-mix(in srgb, var(--gotcha-accent) 50%, transparent);
+  box-shadow: 0 0 0 3px var(--gotcha-glow);
+}
+
+.gotcha-input::placeholder {
+  color: var(--gotcha-muted);
+}
+
+/* ---- Verify button ---- */
+
+.gotcha-verify {
+  padding: 0 1.35rem;
+  border: none;
+  border-radius: var(--gotcha-radius);
+  background: linear-gradient(135deg, var(--gotcha-accent-dim), var(--gotcha-accent));
+  color: #fff;
+  font-weight: 600;
+  font-size: 0.85rem;
+  font-family: var(--gotcha-font-sans);
+  min-width: 5.2rem;
+  cursor: pointer;
+  transition: opacity 150ms, transform 150ms, box-shadow 200ms, filter 200ms;
+  box-shadow: 0 2px 12px var(--gotcha-glow);
+}
+
+.gotcha-verify:hover:not(:disabled) {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px var(--gotcha-glow-strong);
+  filter: brightness(1.1);
+}
+
+.gotcha-verify:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+.gotcha-verify.success {
+  background: linear-gradient(135deg, #16a34a, var(--gotcha-success));
+}
+
+.gotcha-verify.fail {
+  background: linear-gradient(135deg, #dc2626, var(--gotcha-danger));
+}
+
+/* ---- Status messages ---- */
+
+.gotcha-status {
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-align: center;
+  padding: 0.55rem 0.75rem;
+  border-radius: 0.65rem;
+  margin: 0 0 0.55rem;
+  animation: gotcha-fade-in 200ms ease;
+  font-family: var(--gotcha-font-sans);
+}
+
+.gotcha-status.success {
+  color: var(--gotcha-success);
+  background: color-mix(in srgb, var(--gotcha-success) 8%, transparent);
+  border: 1px solid color-mix(in srgb, var(--gotcha-success) 15%, transparent);
+}
+
+.gotcha-status.fail {
+  color: var(--gotcha-danger);
+  background: color-mix(in srgb, var(--gotcha-danger) 8%, transparent);
+  border: 1px solid color-mix(in srgb, var(--gotcha-danger) 15%, transparent);
+}
+
+.gotcha-status.timeout {
+  color: var(--gotcha-muted);
+  background: color-mix(in srgb, var(--gotcha-muted) 6%, transparent);
+  border: 1px solid color-mix(in srgb, var(--gotcha-muted) 10%, transparent);
+}
+
+/* ---- Human escape button ---- */
+
+.gotcha-human-btn {
+  display: block;
+  width: 100%;
+  padding: 0.7rem 1rem;
+  border: 1px dashed color-mix(in srgb, var(--gotcha-accent) 25%, transparent);
+  border-radius: var(--gotcha-radius);
+  background: transparent;
+  color: var(--gotcha-muted);
+  font-size: 0.8rem;
+  font-weight: 500;
+  font-family: var(--gotcha-font-sans);
+  margin-bottom: 0.7rem;
+  cursor: pointer;
+  transition: color 200ms, border-color 200ms, background 200ms;
+  animation: gotcha-fade-up 350ms ease both;
+}
+
+.gotcha-human-btn:hover {
+  color: var(--gotcha-fg);
+  border-color: color-mix(in srgb, var(--gotcha-accent) 45%, transparent);
+  background: var(--gotcha-accent-bg);
+}
+
+/* ---- Footer ---- */
+
+.gotcha-footer {
+  text-align: center;
+  font-size: 0.66rem;
+  color: var(--gotcha-muted);
+  opacity: 0.55;
+  margin: 0.3rem 0 0;
+  font-family: var(--gotcha-font-sans);
+  letter-spacing: 0.01em;
+}
+
+.gotcha-powered {
+  margin-top: 0.15rem;
+  opacity: 0.45;
+  letter-spacing: 0.03em;
+}
+
+.gotcha-powered strong {
+  letter-spacing: 0.08em;
+  color: var(--gotcha-accent-light);
+}
+
+.gotcha-tooltip-wrap {
+  position: relative;
+  cursor: default;
+}
+
+.gotcha-tooltip {
+  display: none;
+  position: absolute;
+  bottom: calc(100% + 10px);
+  left: 50%;
+  transform: translateX(-50%);
+  white-space: nowrap;
+  padding: 0.5rem 0.8rem;
+  border-radius: 0.55rem;
+  border: 1px solid var(--gotcha-border-strong);
+  background: var(--gotcha-surface-raised);
+  font-size: 0.64rem;
+  color: var(--gotcha-muted);
+  letter-spacing: 0.02em;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+  animation: gotcha-fade-in 150ms ease;
+  z-index: 300;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.gotcha-tooltip b {
+  color: var(--gotcha-accent-light);
+  font-weight: 700;
+}
+
+.gotcha-tooltip-wrap:hover .gotcha-tooltip {
+  display: block;
+}

@@ -1,0 +1,14 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: "Geist", "Inter", system-ui, -apple-system, sans-serif;
+  background: #060b18;
+  color: #e4eaf6;
+  min-height: 100vh;
+}

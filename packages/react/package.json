@@ -1,0 +1,51 @@
+{
+  "name": "@gotcha-captcha/react",
+  "version": "0.1.0",
+  "description": "React component for GOTCHA — reverse CAPTCHA for agents",
+  "type": "module",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    },
+    "./styles.css": "./dist/styles.css"
+  },
+  "sideEffects": ["./dist/styles.css"],
+  "keywords": ["captcha", "reverse-captcha", "ai-agent", "react", "component", "gotcha"],
+  "files": ["dist"],
+  "scripts": {
+    "build": "tsup",
+    "dev": "tsup --watch",
+    "typecheck": "tsc --noEmit",
+    "clean": "rm -rf dist"
+  },
+  "dependencies": {
+    "@gotcha-captcha/core": "workspace:*"
+  },
+  "peerDependencies": {
+    "react": "^18 || ^19",
+    "react-dom": "^18 || ^19"
+  },
+  "devDependencies": {
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "react": "^19",
+    "react-dom": "^19",
+    "tsup": "^8",
+    "typescript": "^5.7"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/maypaz/gotcha.git",
+    "directory": "packages/react"
+  },
+  "homepage": "https://github.com/maypaz/gotcha#readme",
+  "bugs": {
+    "url": "https://github.com/maypaz/gotcha/issues"
+  },
+  "license": "MIT"
+}
