@@ -30,12 +30,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/maypaz/gotcha.git",
+    "url": "https://github.com/mondaycom/gotcha-captcha.git",
     "directory": "packages/core"
   },
-  "homepage": "https://github.com/maypaz/gotcha#readme",
+  "homepage": "https://github.com/mondaycom/gotcha-captcha#readme",
   "bugs": {
-    "url": "https://github.com/maypaz/gotcha/issues"
+    "url": "https://github.com/mondaycom/gotcha-captcha/issues"
   },
   "license": "MIT"
 }
