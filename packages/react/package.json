@@ -1,7 +1,7 @@
 {
-  "name": "@gotcha-captcha/react",
+  "name": "@mondaydotcomorg/hatcha-react",
   "version": "0.1.0",
-  "description": "React component for GOTCHA — reverse CAPTCHA for agents",
+  "description": "React component for HATCHA — reverse CAPTCHA for agents",
   "type": "module",
   "main": "./dist/index.cjs",
   "module": "./dist/index.js",
@@ -15,7 +15,7 @@
     "./styles.css": "./dist/styles.css"
   },
   "sideEffects": ["./dist/styles.css"],
-  "keywords": ["captcha", "reverse-captcha", "ai-agent", "react", "component", "gotcha"],
+  "keywords": ["captcha", "reverse-captcha", "ai-agent", "react", "component", "hatcha"],
   "files": ["dist"],
   "scripts": {
     "build": "tsup",
@@ -24,7 +24,7 @@
     "clean": "rm -rf dist"
   },
   "dependencies": {
-    "@gotcha-captcha/core": "workspace:*"
+    "@mondaydotcomorg/hatcha-core": "workspace:*"
   },
   "peerDependencies": {
     "react": "^18 || ^19",
@@ -40,12 +40,16 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/mondaycom/gotcha-captcha.git",
+    "url": "https://github.com/mondaycom/HATCHA.git",
     "directory": "packages/react"
   },
-  "homepage": "https://github.com/mondaycom/gotcha-captcha#readme",
+  "homepage": "https://github.com/mondaycom/HATCHA#readme",
   "bugs": {
-    "url": "https://github.com/mondaycom/gotcha-captcha/issues"
+    "url": "https://github.com/mondaycom/HATCHA/issues"
   },
-  "license": "MIT"
+  "license": "MIT",
+  "author": "monday.com",
+  "publishConfig": {
+    "access": "public"
+  }
 }

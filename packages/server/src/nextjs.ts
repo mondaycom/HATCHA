@@ -1,24 +1,24 @@
 import {
   handleChallenge,
   handleVerify,
-  type GotchaServerConfig,
+  type HatchaServerConfig,
 } from "./handler.js";
 
 /**
- * Create a Next.js App Router handler for GOTCHA.
+ * Create a Next.js App Router handler for HATCHA.
  *
- * Usage (app/api/gotcha/[...gotcha]/route.ts):
+ * Usage (app/api/hatcha/[...hatcha]/route.ts):
  *
- *   import { createGotchaHandler } from "@gotcha-captcha/server/nextjs";
+ *   import { createHatchaHandler } from "@mondaydotcomorg/hatcha-server/nextjs";
  *
- *   const handler = createGotchaHandler({
- *     secret: process.env.GOTCHA_SECRET!,
+ *   const handler = createHatchaHandler({
+ *     secret: process.env.HATCHA_SECRET!,
  *   });
  *
  *   export const GET = handler;
  *   export const POST = handler;
  */
-export function createGotchaHandler(config: GotchaServerConfig) {
+export function createHatchaHandler(config: HatchaServerConfig) {
   return async function handler(request: Request): Promise<Response> {
     const url = new URL(request.url);
     const segments = url.pathname.split("/").filter(Boolean);

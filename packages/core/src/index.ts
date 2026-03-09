@@ -9,5 +9,5 @@ export type {
   ChallengePayload,
   VerifyResult,
   ChallengeGenerator,
-  GotchaConfig,
+  HatchaConfig,
 } from "./types.js";

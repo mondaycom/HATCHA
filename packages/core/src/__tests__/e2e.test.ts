@@ -2,9 +2,9 @@ import { describe, it, expect } from "vitest";
 import { createChallenge } from "../generate.js";
 import { verifyAnswer } from "../verify.js";
 import { signToken } from "../crypto.js";
-import type { GotchaConfig } from "../types.js";
+import type { HatchaConfig } from "../types.js";
 
-const config: GotchaConfig = {
+const config: HatchaConfig = {
   secret: "e2e-test-secret-key",
 };
 
@@ -119,19 +119,4 @@ describe("createChallenge -> verifyAnswer", () => {
     expect(result.success).toBe(true);
   });
 
-  it("works with expression challenges", async () => {
-    const { challenge, token } = await createChallenge({
-      ...config,
-      challengeTypes: ["expression"],
-    });
-
-    const match = challenge.prompt.match(
-      /\((\d+) \u00d7 (\d+)\) \+ \((\d+) \u00d7 (\d+)\) \u2212 (\d+)/,
-    )!;
-    const [, a, b, c, d, e] = match.map(Number);
-    const answer = String(a * b + c * d - e);
-
-    const result = await verifyAnswer(config, answer, token);
-    expect(result.success).toBe(true);
-  });
 });

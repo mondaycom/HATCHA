@@ -1,8 +1,8 @@
-import { createChallenge } from "@gotcha-captcha/core";
+import { createChallenge } from "@mondaydotcomorg/hatcha-core";
 
 export async function GET() {
   const payload = await createChallenge({
-    secret: process.env.GOTCHA_SECRET!,
+    secret: process.env.HATCHA_SECRET!,
   });
 
   return Response.json(payload, {

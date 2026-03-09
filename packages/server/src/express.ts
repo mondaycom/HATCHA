@@ -1,24 +1,24 @@
 import {
   handleChallenge,
   handleVerify,
-  type GotchaServerConfig,
+  type HatchaServerConfig,
 } from "./handler.js";
 
 /**
- * Create an Express router for GOTCHA.
+ * Create an Express router for HATCHA.
  *
  * Usage:
  *
  *   import express from "express";
- *   import { gotchaRouter } from "@gotcha-captcha/server/express";
+ *   import { hatchaRouter } from "@mondaydotcomorg/hatcha-server/express";
  *
  *   const app = express();
  *   app.use(express.json());
- *   app.use("/api/gotcha", gotchaRouter({ secret: process.env.GOTCHA_SECRET! }));
+ *   app.use("/api/hatcha", hatchaRouter({ secret: process.env.HATCHA_SECRET! }));
  *
  * Returns a function(app) that registers GET /challenge and POST /verify.
  */
-export function gotchaRouter(config: GotchaServerConfig) {
+export function hatchaRouter(config: HatchaServerConfig) {
   /* Return a standard middleware/router factory that works without
      importing Express as a dependency. We use the raw (req, res, next)
      signature so this package stays dependency-free. */

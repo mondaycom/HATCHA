@@ -22,7 +22,7 @@ export const charCount: ChallengeGenerator = {
         title: "Character Census",
         description: `Count every occurrence of the letter "${target}" in the text.`,
         prompt: s,
-        timeLimit: 15,
+        timeLimit: 30,
         answer,
       },
       answer,

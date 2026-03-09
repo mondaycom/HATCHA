@@ -21,7 +21,7 @@ export const binaryDecode: ChallengeGenerator = {
         title: "Binary Decode",
         description: "Convert the binary octets to ASCII text.",
         prompt: binary,
-        timeLimit: 15,
+        timeLimit: 30,
         answer: word,
       },
       answer: word,

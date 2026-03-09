@@ -1,18 +1,20 @@
 <p align="center">
-  <h1 align="center">GOTCHA</h1>
-  <p align="center"><strong>CAPTCHA proves you're human. GOTCHA proves you're not.</strong></p>
+  <h1 align="center">HATCHA</h1>
+  <p align="center"><strong>CAPTCHA proves you're human. HATCHA proves you're not.</strong></p>
 </p>
 
 <p align="center">
+  <a href="https://www.npmjs.com/package/@mondaydotcomorg/hatcha-core"><img src="https://img.shields.io/npm/v/@mondaydotcomorg/hatcha-core" alt="npm" /></a>
   <a href="./LICENSE"><img src="https://img.shields.io/badge/license-MIT-blue" alt="License" /></a>
+  <a href="https://github.com/mondaycom/HATCHA/actions"><img src="https://github.com/mondaycom/HATCHA/actions/workflows/ci.yml/badge.svg" alt="CI" /></a>
 </p>
 
 ---
 
-GOTCHA (**G**ate-**O**nly **T**est for **C**omputational **H**yperfast **A**gents) is a reverse CAPTCHA that gates access behind challenges trivial for AI agents but painful for humans — large-number multiplication, string reversal, binary decoding, and more.
+HATCHA (**H**yperfast **A**gent **T**est for **C**omputational **H**euristic **A**ssessment) is a reverse CAPTCHA that gates access behind challenges trivial for AI agents but painful for humans — large-number multiplication, string reversal, binary decoding, and more.
 
 - **Server-side verification** — answers never reach the client. HMAC-signed tokens, stateless, no database required.
-- **6 built-in challenge types** — math, string reversal, character counting, expression evaluation, sorting, binary decode.
+- **5 built-in challenge types** — math, string reversal, character counting, sorting, binary decode.
 - **Extensible** — register custom challenge generators at runtime.
 - **Themeable** — dark, light, or auto mode via CSS custom properties.
 - **Framework adapters** — Next.js App Router and Express middleware out of the box.
@@ -22,17 +24,17 @@ GOTCHA (**G**ate-**O**nly **T**est for **C**omputational **H**yperfast **A**gent
 ### 1. Install
 
 ```bash
-npm install @gotcha-captcha/react @gotcha-captcha/server
+npm install @mondaydotcomorg/hatcha-react @mondaydotcomorg/hatcha-server
 ```
 
 ### 2. Add the API route
 
 ```typescript
-// app/api/gotcha/[...gotcha]/route.ts
-import { createGotchaHandler } from "@gotcha-captcha/server/nextjs";
+// app/api/hatcha/[...hatcha]/route.ts
+import { createHatchaHandler } from "@mondaydotcomorg/hatcha-server/nextjs";
 
-const handler = createGotchaHandler({
-  secret: process.env.GOTCHA_SECRET!,
+const handler = createHatchaHandler({
+  secret: process.env.HATCHA_SECRET!,
 });
 
 export const GET = handler;
@@ -43,14 +45,14 @@ export const POST = handler;
 
 ```tsx
 // app/layout.tsx
-import { GotchaProvider } from "@gotcha-captcha/react";
-import "@gotcha-captcha/react/styles.css";
+import { HatchaProvider } from "@mondaydotcomorg/hatcha-react";
+import "@mondaydotcomorg/hatcha-react/styles.css";
 
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body>
-        <GotchaProvider>{children}</GotchaProvider>
+        <HatchaProvider>{children}</HatchaProvider>
       </body>
     </html>
   );
@@ -61,10 +63,10 @@ export default function RootLayout({ children }) {
 
 ```tsx
 "use client";
-import { useGotcha } from "@gotcha-captcha/react";
+import { useHatcha } from "@mondaydotcomorg/hatcha-react";
 
 function AgentModeButton() {
-  const { requestVerification } = useGotcha();
+  const { requestVerification } = useHatcha();
 
   return (
     <button
@@ -84,7 +86,7 @@ function AgentModeButton() {
 
 ```bash
 # .env.local
-GOTCHA_SECRET=your-random-secret-here
+HATCHA_SECRET=your-random-secret-here
 ```
 
 ## How it works
@@ -92,7 +94,7 @@ GOTCHA_SECRET=your-random-secret-here
 ```
 Client                            Server
   │                                 │
-  │  GET /api/gotcha/challenge      │
+  │  GET /api/hatcha/challenge      │
   │────────────────────────────────►│
   │                                 │  Generate challenge
   │                                 │  Hash answer
@@ -102,7 +104,7 @@ Client                            Server
   │                                 │
   │  Agent solves the challenge     │
   │                                 │
-  │  POST /api/gotcha/verify        │
+  │  POST /api/hatcha/verify        │
   │  { answer, token }              │
   │────────────────────────────────►│
   │                                 │  Verify HMAC signature
@@ -118,17 +120,16 @@ The answer **never** reaches the client. The signed token is opaque and contains
 
 | Type | Icon | What it does | Time limit |
 |------|------|-------------|------------|
-| `math` | × | 5-digit × 5-digit multiplication | 15 s |
-| `string` | ↔ | Reverse a 60–80 character random string | 15 s |
-| `count` | # | Count a specific character in ~250 characters | 15 s |
-| `expression` | f(x) | Evaluate `(a × b) + (c × d) − e` | 15 s |
-| `sort` | ⇅ | Sort 15 numbers, return the k-th smallest | 15 s |
-| `binary` | 01 | Decode binary octets to ASCII | 15 s |
+| `math` | × | 5-digit × 5-digit multiplication | 30 s |
+| `string` | ↔ | Reverse a 60–80 character random string | 30 s |
+| `count` | # | Count a specific character in ~250 characters | 30 s |
+| `sort` | ⇅ | Sort 15 numbers, return the k-th smallest | 30 s |
+| `binary` | 01 | Decode binary octets to ASCII | 30 s |
 
 ## Custom challenges
 
 ```typescript
-import { registerChallenge } from "@gotcha-captcha/server";
+import { registerChallenge } from "@mondaydotcomorg/hatcha-server";
 
 registerChallenge({
   type: "hex",
@@ -141,7 +142,7 @@ registerChallenge({
         title: "Hex Decode",
         description: "Convert this hex number to decimal.",
         prompt: `0x${n.toString(16).toUpperCase()}`,
-        timeLimit: 15,
+        timeLimit: 30,
         answer: String(n),
       },
       answer: String(n),
@@ -152,30 +153,30 @@ registerChallenge({
 
 ## Theming
 
-GOTCHA uses CSS custom properties scoped under `--gotcha-*`. Override them on any parent element:
+HATCHA uses CSS custom properties scoped under `--hatcha-*`. Override them on any parent element:
 
 ```css
-[data-gotcha-theme] {
-  --gotcha-accent: #3b82f6;
-  --gotcha-accent-light: #60a5fa;
-  --gotcha-bg: #060b18;
-  --gotcha-fg: #e4eaf6;
-  --gotcha-success: #22c55e;
-  --gotcha-danger: #ef4444;
+[data-hatcha-theme] {
+  --hatcha-accent: #3b82f6;
+  --hatcha-accent-light: #60a5fa;
+  --hatcha-bg: #060b18;
+  --hatcha-fg: #e4eaf6;
+  --hatcha-success: #22c55e;
+  --hatcha-danger: #ef4444;
 }
 ```
 
-Pass `theme="dark"`, `theme="light"`, or `theme="auto"` to `<GotchaProvider>` or `<Gotcha>`.
+Pass `theme="dark"`, `theme="light"`, or `theme="auto"` to `<HatchaProvider>` or `<Hatcha>`.
 
 ## Express
 
 ```typescript
 import express from "express";
-import { gotchaRouter } from "@gotcha-captcha/server/express";
+import { hatchaRouter } from "@mondaydotcomorg/hatcha-server/express";
 
 const app = express();
 app.use(express.json());
-app.use("/api/gotcha", gotchaRouter({ secret: process.env.GOTCHA_SECRET! }));
+app.use("/api/hatcha", hatchaRouter({ secret: process.env.HATCHA_SECRET! }));
 
 app.listen(3000);
 ```
@@ -184,15 +185,15 @@ app.listen(3000);
 
 | Package | Description |
 |---------|-------------|
-| [`@gotcha-captcha/core`](./packages/core) | Challenge generation and cryptographic verification |
-| [`@gotcha-captcha/react`](./packages/react) | React component, provider, and styles |
-| [`@gotcha-captcha/server`](./packages/server) | Next.js and Express server handlers |
+| [`@mondaydotcomorg/hatcha-core`](./packages/core) | Challenge generation and cryptographic verification |
+| [`@mondaydotcomorg/hatcha-react`](./packages/react) | React component, provider, and styles |
+| [`@mondaydotcomorg/hatcha-server`](./packages/server) | Next.js and Express server handlers |
 
 ## Development
 
 ```bash
-git clone https://github.com/mondaycom/gotcha-captcha.git
-cd gotcha-captcha
+git clone https://github.com/mondaycom/HATCHA.git
+cd HATCHA
 pnpm install
 pnpm build
 cd examples/nextjs-app
@@ -201,7 +202,7 @@ pnpm dev
 
 ## Contributing
 
-Contributions are welcome! Please open an issue first to discuss what you'd like to change.
+Contributions are welcome! See [CONTRIBUTING.md](./CONTRIBUTING.md) for setup instructions and guidelines.
 
 ## License
 

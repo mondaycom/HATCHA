@@ -1,4 +1,4 @@
-import { verifyAnswer } from "@gotcha-captcha/core";
+import { verifyAnswer } from "@mondaydotcomorg/hatcha-core";
 
 export async function POST(request: Request) {
   const body = await request.json();
@@ -12,7 +12,7 @@ export async function POST(request: Request) {
   }
 
   const result = await verifyAnswer(
-    { secret: process.env.GOTCHA_SECRET! },
+    { secret: process.env.HATCHA_SECRET! },
     answer,
     token,
   );

@@ -1,6 +1,6 @@
-export { Gotcha, type GotchaProps } from "./gotcha.js";
+export { Hatcha, type HatchaProps } from "./hatcha.js";
 export {
-  GotchaProvider,
-  useGotcha,
-  type GotchaProviderProps,
-} from "./gotcha-provider.js";
+  HatchaProvider,
+  useHatcha,
+  type HatchaProviderProps,
+} from "./hatcha-provider.js";

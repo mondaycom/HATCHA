@@ -1,5 +1,5 @@
 {
-  "name": "gotcha-nextjs-example",
+  "name": "hatcha-nextjs-example",
   "version": "0.0.0",
   "private": true,
   "scripts": {
@@ -8,9 +8,9 @@
     "start": "next start"
   },
   "dependencies": {
-    "@gotcha-captcha/core": "workspace:*",
-    "@gotcha-captcha/react": "workspace:*",
-    "@gotcha-captcha/server": "workspace:*",
+    "@mondaydotcomorg/hatcha-core": "workspace:*",
+    "@mondaydotcomorg/hatcha-react": "workspace:*",
+    "@mondaydotcomorg/hatcha-server": "workspace:*",
     "next": "^15",
     "react": "^19",
     "react-dom": "^19"

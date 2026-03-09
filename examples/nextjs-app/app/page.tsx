@@ -1,10 +1,10 @@
 "use client";
 
 import { useState } from "react";
-import { useGotcha } from "@gotcha-captcha/react";
+import { useHatcha } from "@mondaydotcomorg/hatcha-react";
 
 export default function Home() {
-  const { requestVerification } = useGotcha();
+  const { requestVerification } = useHatcha();
   const [verified, setVerified] = useState(false);
   const [token, setToken] = useState("");
 
@@ -38,8 +38,24 @@ export default function Home() {
           backgroundClip: "text",
         }}
       >
-        GOTCHA
+        HATCHA
       </h1>
+      <p
+        style={{
+          fontSize: "0.7rem",
+          color: "#4a5a78",
+          textAlign: "center",
+          letterSpacing: "0.12em",
+          fontFamily: "'Geist Mono', ui-monospace, monospace",
+        }}
+      >
+        <strong style={{ color: "#60a5fa" }}>H</strong>yperfast{" "}
+        <strong style={{ color: "#60a5fa" }}>A</strong>gent{" "}
+        <strong style={{ color: "#60a5fa" }}>T</strong>est for{" "}
+        <strong style={{ color: "#60a5fa" }}>C</strong>omputational{" "}
+        <strong style={{ color: "#60a5fa" }}>H</strong>euristic{" "}
+        <strong style={{ color: "#60a5fa" }}>A</strong>ssessment
+      </p>
       <p
         style={{
           fontSize: "1.1rem",
@@ -51,7 +67,7 @@ export default function Home() {
       >
         CAPTCHA proves you&apos;re human.
         <br />
-        <strong style={{ color: "#60a5fa" }}>GOTCHA</strong> proves you&apos;re
+        <strong style={{ color: "#60a5fa" }}>HATCHA</strong> proves you&apos;re
         not.
       </p>
 

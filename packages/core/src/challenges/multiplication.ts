@@ -14,7 +14,7 @@ export const multiplication: ChallengeGenerator = {
         title: "Speed Arithmetic",
         description: "Compute the exact product of these two numbers.",
         prompt: `${a.toLocaleString("en-US")} \u00d7 ${b.toLocaleString("en-US")}`,
-        timeLimit: 15,
+        timeLimit: 30,
         answer: String(a * b),
       },
       answer: String(a * b),

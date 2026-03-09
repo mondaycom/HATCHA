@@ -1,5 +1,5 @@
 /* ------------------------------------------------------------------ */
-/*  Public types for @gotcha-captcha/core                              */
+/*  Public types for @mondaydotcomorg/hatcha-core                                      */
 /* ------------------------------------------------------------------ */
 
 /** What the client sees — never includes the answer. */
@@ -43,7 +43,7 @@ export interface ChallengeGenerator {
 }
 
 /** Configuration for createChallenge / verifyAnswer. */
-export interface GotchaConfig {
+export interface HatchaConfig {
   /** HMAC secret — required. */
   secret: string;
   /** How long (in seconds) a challenge token stays valid. Default: 120. */

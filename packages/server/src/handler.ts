@@ -1,10 +1,10 @@
 import {
   createChallenge,
   verifyAnswer,
-  type GotchaConfig,
-} from "@gotcha-captcha/core";
+  type HatchaConfig,
+} from "@mondaydotcomorg/hatcha-core";
 
-export interface GotchaServerConfig {
+export interface HatchaServerConfig {
   /** HMAC secret for signing challenge tokens. */
   secret: string;
   /** Token TTL in seconds. Default: 120. */
@@ -14,8 +14,8 @@ export interface GotchaServerConfig {
 }
 
 /** Framework-agnostic handler — returns plain objects, no Request/Response. */
-export async function handleChallenge(config: GotchaServerConfig) {
-  const coreConfig: GotchaConfig = {
+export async function handleChallenge(config: HatchaServerConfig) {
+  const coreConfig: HatchaConfig = {
     secret: config.secret,
     tokenTTL: config.tokenTTL,
     challengeTypes: config.challengeTypes,
@@ -24,14 +24,14 @@ export async function handleChallenge(config: GotchaServerConfig) {
 }
 
 export async function handleVerify(
-  config: GotchaServerConfig,
+  config: HatchaServerConfig,
   body: { answer?: string; token?: string },
 ) {
   if (!body.answer || !body.token) {
     return { success: false, error: "Missing answer or token." };
   }
 
-  const coreConfig: GotchaConfig = {
+  const coreConfig: HatchaConfig = {
     secret: config.secret,
     tokenTTL: config.tokenTTL,
     challengeTypes: config.challengeTypes,

@@ -1,8 +1,7 @@
 {
-  "name": "@gotcha-captcha/core",
-  "private": true,
+  "name": "@mondaydotcomorg/hatcha-core",
   "version": "0.1.0",
-  "description": "Challenge generation and cryptographic verification for GOTCHA",
+  "description": "Challenge generation and cryptographic verification for HATCHA",
   "type": "module",
   "main": "./dist/index.cjs",
   "module": "./dist/index.js",
@@ -15,7 +14,7 @@
     }
   },
   "sideEffects": false,
-  "keywords": ["captcha", "reverse-captcha", "ai-agent", "verification", "hmac", "challenge", "gotcha"],
+  "keywords": ["captcha", "reverse-captcha", "ai-agent", "verification", "hmac", "challenge", "hatcha"],
   "files": ["dist"],
   "scripts": {
     "build": "tsup",
@@ -30,12 +29,16 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/mondaycom/gotcha-captcha.git",
+    "url": "https://github.com/mondaycom/HATCHA.git",
     "directory": "packages/core"
   },
-  "homepage": "https://github.com/mondaycom/gotcha-captcha#readme",
+  "homepage": "https://github.com/mondaycom/HATCHA#readme",
   "bugs": {
-    "url": "https://github.com/mondaycom/gotcha-captcha/issues"
+    "url": "https://github.com/mondaycom/HATCHA/issues"
   },
-  "license": "MIT"
+  "license": "MIT",
+  "author": "monday.com",
+  "publishConfig": {
+    "access": "public"
+  }
 }

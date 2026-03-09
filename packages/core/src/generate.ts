@@ -1,4 +1,4 @@
-import type { ChallengePayload, GotchaConfig } from "./types.js";
+import type { ChallengePayload, HatchaConfig } from "./types.js";
 import { getGenerators } from "./challenges/index.js";
 import { sha256, randomId, signToken } from "./crypto.js";
 import { normalise, randomInt } from "./utils.js";
@@ -10,7 +10,7 @@ import { normalise, randomInt } from "./utils.js";
  * signed `token` embedding the hashed answer and an expiry.
  */
 export async function createChallenge(
-  config: GotchaConfig,
+  config: HatchaConfig,
 ): Promise<ChallengePayload> {
   const generators = getGenerators(config.challengeTypes);
   if (generators.length === 0) {

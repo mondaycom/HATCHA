@@ -1,7 +1,7 @@
 {
-  "name": "@gotcha-captcha/server",
+  "name": "@mondaydotcomorg/hatcha-server",
   "version": "0.1.0",
-  "description": "Server middleware for GOTCHA — Next.js and Express handlers",
+  "description": "Server middleware for HATCHA — Next.js and Express handlers",
   "type": "module",
   "main": "./dist/index.cjs",
   "module": "./dist/index.js",
@@ -24,7 +24,7 @@
     }
   },
   "sideEffects": false,
-  "keywords": ["captcha", "reverse-captcha", "ai-agent", "server", "nextjs", "express", "middleware", "gotcha"],
+  "keywords": ["captcha", "reverse-captcha", "ai-agent", "server", "nextjs", "express", "middleware", "hatcha"],
   "files": ["dist"],
   "scripts": {
     "build": "tsup",
@@ -34,7 +34,7 @@
     "test": "vitest run"
   },
   "dependencies": {
-    "@gotcha-captcha/core": "workspace:*"
+    "@mondaydotcomorg/hatcha-core": "workspace:*"
   },
   "devDependencies": {
     "@types/express": "^5",
@@ -43,12 +43,16 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/mondaycom/gotcha-captcha.git",
+    "url": "https://github.com/mondaycom/HATCHA.git",
     "directory": "packages/server"
   },
-  "homepage": "https://github.com/mondaycom/gotcha-captcha#readme",
+  "homepage": "https://github.com/mondaycom/HATCHA#readme",
   "bugs": {
-    "url": "https://github.com/mondaycom/gotcha-captcha/issues"
+    "url": "https://github.com/mondaycom/HATCHA/issues"
   },
-  "license": "MIT"
+  "license": "MIT",
+  "author": "monday.com",
+  "publishConfig": {
+    "access": "public"
+  }
 }

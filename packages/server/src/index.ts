@@ -1,11 +1,11 @@
 export { handleChallenge, handleVerify } from "./handler.js";
-export type { GotchaServerConfig } from "./handler.js";
-export { createGotchaHandler } from "./nextjs.js";
-export { gotchaRouter } from "./express.js";
+export type { HatchaServerConfig } from "./handler.js";
+export { createHatchaHandler } from "./nextjs.js";
+export { hatchaRouter } from "./express.js";
 
-export { registerChallenge, getGenerators } from "@gotcha-captcha/core";
+export { registerChallenge, getGenerators } from "@mondaydotcomorg/hatcha-core";
 export type {
   ChallengeGenerator,
   ChallengeDisplay,
-  GotchaConfig,
-} from "@gotcha-captcha/core";
+  HatchaConfig,
+} from "@mondaydotcomorg/hatcha-core";

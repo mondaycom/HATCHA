@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
-import { GotchaProvider } from "@gotcha-captcha/react";
-import "@gotcha-captcha/react/styles.css";
+import { HatchaProvider } from "@mondaydotcomorg/hatcha-react";
+import "@mondaydotcomorg/hatcha-react/styles.css";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "GOTCHA Demo",
+  title: "HATCHA Demo",
   description: "Reverse CAPTCHA that proves you're not human",
 };
 
@@ -16,13 +16,13 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <GotchaProvider
-          challengeEndpoint="/api/gotcha/challenge"
-          verifyEndpoint="/api/gotcha/verify"
+        <HatchaProvider
+          challengeEndpoint="/api/hatcha/challenge"
+          verifyEndpoint="/api/hatcha/verify"
           theme="dark"
         >
           {children}
-        </GotchaProvider>
+        </HatchaProvider>
       </body>
     </html>
   );

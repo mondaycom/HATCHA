@@ -2,7 +2,6 @@ import { describe, it, expect } from "vitest";
 import { multiplication } from "../challenges/multiplication.js";
 import { stringReverse } from "../challenges/string-reverse.js";
 import { charCount } from "../challenges/char-count.js";
-import { expression } from "../challenges/expression.js";
 import { sort } from "../challenges/sort.js";
 import { binaryDecode } from "../challenges/binary-decode.js";
 import { registerChallenge, getGenerators } from "../challenges/index.js";
@@ -13,7 +12,7 @@ describe("multiplication generator", () => {
     expect(display.type).toBe("math");
     expect(display.icon).toBe("\u00d7");
     expect(display.title).toBe("Speed Arithmetic");
-    expect(display.timeLimit).toBe(15);
+    expect(display.timeLimit).toBe(30);
     expect(display.prompt).toContain("\u00d7");
 
     const nums = display.prompt.split(" \u00d7 ").map((s) => Number(s.replace(/,/g, "")));
@@ -38,7 +37,7 @@ describe("stringReverse generator", () => {
   it("produces a valid challenge where the answer is the reversed prompt", () => {
     const { display, answer } = stringReverse.generate();
     expect(display.type).toBe("string");
-    expect(display.timeLimit).toBe(15);
+    expect(display.timeLimit).toBe(30);
     expect(answer).toBe(display.prompt.split("").reverse().join(""));
     expect(display.prompt.length).toBeGreaterThanOrEqual(60);
     expect(display.prompt.length).toBeLessThanOrEqual(80);
@@ -49,7 +48,7 @@ describe("charCount generator", () => {
   it("produces a valid challenge with correct count", () => {
     const { display, answer } = charCount.generate();
     expect(display.type).toBe("count");
-    expect(display.timeLimit).toBe(15);
+    expect(display.timeLimit).toBe(30);
 
     const targetMatch = display.description.match(/letter "([a-z])"/);
     expect(targetMatch).not.toBeNull();
@@ -59,26 +58,11 @@ describe("charCount generator", () => {
   });
 });
 
-describe("expression generator", () => {
-  it("produces a valid challenge with correct evaluation", () => {
-    const { display, answer } = expression.generate();
-    expect(display.type).toBe("expression");
-    expect(display.timeLimit).toBe(15);
-
-    const match = display.prompt.match(
-      /\((\d+) \u00d7 (\d+)\) \+ \((\d+) \u00d7 (\d+)\) \u2212 (\d+)/,
-    );
-    expect(match).not.toBeNull();
-    const [, a, b, c, d, e] = match!.map(Number);
-    expect(answer).toBe(String(a * b + c * d - e));
-  });
-});
-
 describe("sort generator", () => {
   it("produces a valid challenge with correct k-th smallest", () => {
     const { display, answer } = sort.generate();
     expect(display.type).toBe("sort");
-    expect(display.timeLimit).toBe(15);
+    expect(display.timeLimit).toBe(30);
 
     const nums = display.prompt.split(", ").map(Number);
     expect(nums).toHaveLength(15);
@@ -95,7 +79,7 @@ describe("binaryDecode generator", () => {
   it("produces a valid challenge where decoding the binary gives the answer", () => {
     const { display, answer } = binaryDecode.generate();
     expect(display.type).toBe("binary");
-    expect(display.timeLimit).toBe(15);
+    expect(display.timeLimit).toBe(30);
 
     const decoded = display.prompt
       .split(" ")
@@ -107,14 +91,13 @@ describe("binaryDecode generator", () => {
 });
 
 describe("challenge registry", () => {
-  it("returns all 6 built-in generators by default", () => {
+  it("returns all 5 built-in generators by default", () => {
     const all = getGenerators();
-    expect(all.length).toBeGreaterThanOrEqual(6);
+    expect(all.length).toBeGreaterThanOrEqual(5);
     const types = all.map((g) => g.type);
     expect(types).toContain("math");
     expect(types).toContain("string");
     expect(types).toContain("count");
-    expect(types).toContain("expression");
     expect(types).toContain("sort");
     expect(types).toContain("binary");
   });

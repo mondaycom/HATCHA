@@ -20,7 +20,7 @@ export const stringReverse: ChallengeGenerator = {
         title: "String Reversal",
         description: "Reverse every character of the string below.",
         prompt: s,
-        timeLimit: 15,
+        timeLimit: 30,
         answer,
       },
       answer,

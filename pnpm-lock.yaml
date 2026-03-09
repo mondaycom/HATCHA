@@ -20,13 +20,13 @@ importers:
 
   examples/nextjs-app:
     dependencies:
-      '@gotcha-captcha/core':
+      '@mondaydotcomorg/hatcha-core':
         specifier: workspace:*
         version: link:../../packages/core
-      '@gotcha-captcha/react':
+      '@mondaydotcomorg/hatcha-react':
         specifier: workspace:*
         version: link:../../packages/react
-      '@gotcha-captcha/server':
+      '@mondaydotcomorg/hatcha-server':
         specifier: workspace:*
         version: link:../../packages/server
       next:
@@ -60,7 +60,7 @@ importers:
 
   packages/react:
     dependencies:
-      '@gotcha-captcha/core':
+      '@mondaydotcomorg/hatcha-core':
         specifier: workspace:*
         version: link:../core
     devDependencies:
@@ -85,7 +85,7 @@ importers:
 
   packages/server:
     dependencies:
-      '@gotcha-captcha/core':
+      '@mondaydotcomorg/hatcha-core':
         specifier: workspace:*
         version: link:../core
     devDependencies:

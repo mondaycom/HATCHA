@@ -2,7 +2,6 @@ import type { ChallengeGenerator } from "../types.js";
 import { multiplication } from "./multiplication.js";
 import { stringReverse } from "./string-reverse.js";
 import { charCount } from "./char-count.js";
-import { expression } from "./expression.js";
 import { sort } from "./sort.js";
 import { binaryDecode } from "./binary-decode.js";
 
@@ -11,7 +10,6 @@ const registry: ChallengeGenerator[] = [
   multiplication,
   stringReverse,
   charCount,
-  expression,
   sort,
   binaryDecode,
 ];
@@ -34,7 +32,6 @@ export {
   multiplication,
   stringReverse,
   charCount,
-  expression,
   sort,
   binaryDecode,
 };

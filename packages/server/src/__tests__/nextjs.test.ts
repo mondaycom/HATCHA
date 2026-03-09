@@ -1,7 +1,7 @@
 import { describe, it, expect } from "vitest";
-import { createGotchaHandler } from "../nextjs.js";
+import { createHatchaHandler } from "../nextjs.js";
 
-const handler = createGotchaHandler({ secret: "nextjs-test-secret" });
+const handler = createHatchaHandler({ secret: "nextjs-test-secret" });
 
 function makeRequest(method: string, path: string, body?: unknown): Request {
   const url = `http://localhost:3000${path}`;
@@ -15,7 +15,7 @@ function makeRequest(method: string, path: string, body?: unknown): Request {
 
 describe("Next.js handler routing", () => {
   it("GET /challenge returns a challenge payload", async () => {
-    const req = makeRequest("GET", "/api/gotcha/challenge");
+    const req = makeRequest("GET", "/api/hatcha/challenge");
     const res = await handler(req);
     expect(res.status).toBe(200);
 
@@ -26,13 +26,13 @@ describe("Next.js handler routing", () => {
   });
 
   it("POST /verify with correct answer returns success", async () => {
-    const challengeReq = makeRequest("GET", "/api/gotcha/challenge");
+    const challengeReq = makeRequest("GET", "/api/hatcha/challenge");
     const challengeRes = await handler(challengeReq);
     const { challenge, token } = await challengeRes.json();
 
     const answer = solveChallenge(challenge);
 
-    const verifyReq = makeRequest("POST", "/api/gotcha/verify", {
+    const verifyReq = makeRequest("POST", "/api/hatcha/verify", {
       answer,
       token,
     });
@@ -44,11 +44,11 @@ describe("Next.js handler routing", () => {
   });
 
   it("POST /verify with wrong answer returns 401", async () => {
-    const challengeReq = makeRequest("GET", "/api/gotcha/challenge");
+    const challengeReq = makeRequest("GET", "/api/hatcha/challenge");
     const challengeRes = await handler(challengeReq);
     const { token } = await challengeRes.json();
 
-    const verifyReq = makeRequest("POST", "/api/gotcha/verify", {
+    const verifyReq = makeRequest("POST", "/api/hatcha/verify", {
       answer: "DEFINITELY_WRONG",
       token,
     });
@@ -57,19 +57,19 @@ describe("Next.js handler routing", () => {
   });
 
   it("returns 404 for unknown paths", async () => {
-    const req = makeRequest("GET", "/api/gotcha/unknown");
+    const req = makeRequest("GET", "/api/hatcha/unknown");
     const res = await handler(req);
     expect(res.status).toBe(404);
   });
 
   it("returns 404 for wrong method on challenge", async () => {
-    const req = makeRequest("POST", "/api/gotcha/challenge");
+    const req = makeRequest("POST", "/api/hatcha/challenge");
     const res = await handler(req);
     expect(res.status).toBe(404);
   });
 
   it("sets Cache-Control: no-store", async () => {
-    const req = makeRequest("GET", "/api/gotcha/challenge");
+    const req = makeRequest("GET", "/api/hatcha/challenge");
     const res = await handler(req);
     expect(res.headers.get("Cache-Control")).toBe("no-store");
   });
@@ -97,13 +97,6 @@ function solveChallenge(challenge: {
     case "count": {
       const t = challenge.description.match(/letter "([a-z])"/)![1];
       return String([...challenge.prompt].filter((c) => c === t).length);
-    }
-    case "expression": {
-      const m = challenge.prompt.match(
-        /\((\d+) \u00d7 (\d+)\) \+ \((\d+) \u00d7 (\d+)\) \u2212 (\d+)/,
-      )!;
-      const [, a, b, c, d, e] = m.map(Number);
-      return String(a * b + c * d - e);
     }
     case "sort": {
       const nums = challenge.prompt.split(", ").map(Number);

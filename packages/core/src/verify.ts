@@ -1,4 +1,4 @@
-import type { GotchaConfig, VerifyResult } from "./types.js";
+import type { HatchaConfig, VerifyResult } from "./types.js";
 import { sha256, verifyToken, signVerification } from "./crypto.js";
 import { normalise } from "./utils.js";
 
@@ -13,7 +13,7 @@ import { normalise } from "./utils.js";
  * can use to confirm the challenge was completed.
  */
 export async function verifyAnswer(
-  config: GotchaConfig,
+  config: HatchaConfig,
   answer: string,
   token: string,
 ): Promise<VerifyResult> {

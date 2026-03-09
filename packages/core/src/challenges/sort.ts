@@ -16,7 +16,7 @@ export const sort: ChallengeGenerator = {
         title: "Instant Sort",
         description: `Sort these numbers ascending. What is the ${ordinal(k)} value?`,
         prompt: nums.join(", "),
-        timeLimit: 15,
+        timeLimit: 30,
         answer,
       },
       answer,
