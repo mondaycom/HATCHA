@@ -8,14 +8,14 @@
     "start": "next start"
   },
   "dependencies": {
-    "@mondaycom/hatcha-core": "workspace:*",
-    "@mondaycom/hatcha-react": "workspace:*",
-    "@mondaycom/hatcha-server": "workspace:*",
+    "@mondaycom/hatcha-react": "^0.1.1",
+    "@mondaycom/hatcha-server": "^0.1.1",
     "next": "^15",
     "react": "^19",
     "react-dom": "^19"
   },
   "devDependencies": {
+    "@types/node": "^22",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "typescript": "^5.7"
