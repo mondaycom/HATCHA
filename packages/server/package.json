@@ -1,6 +1,6 @@
 {
   "name": "@mondaycom/hatcha-server",
-  "version": "0.1.0",
+  "version": "0.0.1",
   "description": "Server middleware for HATCHA — Next.js and Express handlers",
   "type": "module",
   "main": "./dist/index.cjs",
@@ -24,8 +24,19 @@
     }
   },
   "sideEffects": false,
-  "keywords": ["captcha", "reverse-captcha", "ai-agent", "server", "nextjs", "express", "middleware", "hatcha"],
-  "files": ["dist"],
+  "keywords": [
+    "captcha",
+    "reverse-captcha",
+    "ai-agent",
+    "server",
+    "nextjs",
+    "express",
+    "middleware",
+    "hatcha"
+  ],
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "build": "tsup",
     "dev": "tsup --watch",

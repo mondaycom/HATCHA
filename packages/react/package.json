@@ -1,6 +1,6 @@
 {
   "name": "@mondaycom/hatcha-react",
-  "version": "0.1.0",
+  "version": "0.0.1",
   "description": "React component for HATCHA — reverse CAPTCHA for agents",
   "type": "module",
   "main": "./dist/index.cjs",
@@ -14,9 +14,20 @@
     },
     "./styles.css": "./dist/styles.css"
   },
-  "sideEffects": ["./dist/styles.css"],
-  "keywords": ["captcha", "reverse-captcha", "ai-agent", "react", "component", "hatcha"],
-  "files": ["dist"],
+  "sideEffects": [
+    "./dist/styles.css"
+  ],
+  "keywords": [
+    "captcha",
+    "reverse-captcha",
+    "ai-agent",
+    "react",
+    "component",
+    "hatcha"
+  ],
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "build": "tsup",
     "dev": "tsup --watch",
