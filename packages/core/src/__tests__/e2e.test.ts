@@ -19,7 +19,7 @@ describe("createChallenge", () => {
     expect(typeof challenge.prompt).toBe("string");
     expect(typeof challenge.timeLimit).toBe("number");
     expect(challenge.timeLimit).toBeGreaterThan(0);
-    expect((challenge as Record<string, unknown>).answer).toBeUndefined();
+    expect("answer" in challenge).toBe(false);
     expect(typeof token).toBe("string");
     expect(token).toContain(".");
   });

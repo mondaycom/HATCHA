@@ -164,7 +164,7 @@ jobs:
             git tag "${TAG}"
           done
 
-          git push origin HEAD --tags
+          git push origin HEAD --tags --atomic
 
       - name: Create GitHub Releases
         env:
