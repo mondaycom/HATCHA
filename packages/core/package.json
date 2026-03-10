@@ -1,5 +1,5 @@
 {
-  "name": "@mondaydotcomorg/hatcha-core",
+  "name": "@mondaycom/hatcha-core",
   "version": "0.1.0",
   "description": "Challenge generation and cryptographic verification for HATCHA",
   "type": "module",

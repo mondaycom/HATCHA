@@ -11,7 +11,7 @@ describe("handleChallenge", () => {
     expect(typeof result.challenge.type).toBe("string");
     expect(typeof result.challenge.prompt).toBe("string");
     expect(typeof result.token).toBe("string");
-    expect((result.challenge as Record<string, unknown>).answer).toBeUndefined();
+    expect("answer" in result.challenge).toBe(false);
   });
 
   it("respects challengeTypes option", async () => {
@@ -48,7 +48,7 @@ describe("handleVerify", () => {
   it("returns error when answer is missing", async () => {
     const result = await handleVerify(config, { token: "some-token" });
     expect(result.success).toBe(false);
-    expect((result as Record<string, unknown>).error).toBe(
+    expect("error" in result && result.error).toBe(
       "Missing answer or token.",
     );
   });
@@ -56,7 +56,7 @@ describe("handleVerify", () => {
   it("returns error when token is missing", async () => {
     const result = await handleVerify(config, { answer: "some-answer" });
     expect(result.success).toBe(false);
-    expect((result as Record<string, unknown>).error).toBe(
+    expect("error" in result && result.error).toBe(
       "Missing answer or token.",
     );
   });

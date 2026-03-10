@@ -20,13 +20,13 @@ importers:
 
   examples/nextjs-app:
     dependencies:
-      '@mondaydotcomorg/hatcha-core':
+      '@mondaycom/hatcha-core':
         specifier: workspace:*
         version: link:../../packages/core
-      '@mondaydotcomorg/hatcha-react':
+      '@mondaycom/hatcha-react':
         specifier: workspace:*
         version: link:../../packages/react
-      '@mondaydotcomorg/hatcha-server':
+      '@mondaycom/hatcha-server':
         specifier: workspace:*
         version: link:../../packages/server
       next:
@@ -60,7 +60,7 @@ importers:
 
   packages/react:
     dependencies:
-      '@mondaydotcomorg/hatcha-core':
+      '@mondaycom/hatcha-core':
         specifier: workspace:*
         version: link:../core
     devDependencies:
@@ -85,7 +85,7 @@ importers:
 
   packages/server:
     dependencies:
-      '@mondaydotcomorg/hatcha-core':
+      '@mondaycom/hatcha-core':
         specifier: workspace:*
         version: link:../core
     devDependencies:

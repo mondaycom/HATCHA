@@ -7,7 +7,7 @@ import {
   useRef,
   type KeyboardEvent,
 } from "react";
-import type { ChallengeDisplay } from "@mondaydotcomorg/hatcha-core";
+import type { ChallengeDisplay } from "@mondaycom/hatcha-core";
 
 /* ------------------------------------------------------------------ */
 /*  Props                                                              */

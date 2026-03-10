@@ -1,5 +1,5 @@
 /* ------------------------------------------------------------------ */
-/*  Public types for @mondaydotcomorg/hatcha-core                                      */
+/*  Public types for @mondaycom/hatcha-core                                      */
 /* ------------------------------------------------------------------ */
 
 /** What the client sees — never includes the answer. */

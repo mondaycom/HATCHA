@@ -69,20 +69,14 @@ export async function verifyToken(
 
   const [payloadB64, sigB64] = parts;
 
-  let payloadBytes: Uint8Array;
-  let sigBytes: Uint8Array;
   try {
-    payloadBytes = Uint8Array.from(atob(payloadB64), (c) => c.charCodeAt(0));
-    sigBytes = Uint8Array.from(atob(sigB64), (c) => c.charCodeAt(0));
-  } catch {
-    return null;
-  }
+    const payloadBytes = Uint8Array.from(atob(payloadB64), (c) => c.charCodeAt(0));
+    const sigBytes = Uint8Array.from(atob(sigB64), (c) => c.charCodeAt(0));
 
-  const key = await getKey(secret);
-  const valid = await crypto.subtle.verify("HMAC", key, sigBytes, payloadBytes);
-  if (!valid) return null;
+    const key = await getKey(secret);
+    const valid = await crypto.subtle.verify("HMAC", key, sigBytes, payloadBytes);
+    if (!valid) return null;
 
-  try {
     return JSON.parse(new TextDecoder().decode(payloadBytes)) as TokenPayload;
   } catch {
     return null;
