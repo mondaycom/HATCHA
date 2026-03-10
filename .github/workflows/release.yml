@@ -1,0 +1,223 @@
+name: Release
+
+on:
+  workflow_dispatch:
+    inputs:
+      bump:
+        description: "patch: bug fixes (0.1.0→0.1.1) | minor: new features (0.1.0→0.2.0) | major: breaking changes (0.1.0→1.0.0)"
+        type: choice
+        default: "patch"
+        options:
+          - patch
+          - minor
+          - major
+      release_core:
+        description: "Release @mondaycom/hatcha-core"
+        type: boolean
+        default: true
+      release_server:
+        description: "Release @mondaycom/hatcha-server"
+        type: boolean
+        default: true
+      release_react:
+        description: "Release @mondaycom/hatcha-react"
+        type: boolean
+        default: true
+
+permissions:
+  contents: write
+  id-token: write
+
+concurrency:
+  group: release
+  cancel-in-progress: false
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - uses: pnpm/action-setup@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+          registry-url: "https://registry.npmjs.org"
+
+      - run: pnpm install --frozen-lockfile
+
+      - name: Validate selection
+        env:
+          RELEASE_CORE: ${{ inputs.release_core }}
+          RELEASE_SERVER: ${{ inputs.release_server }}
+          RELEASE_REACT: ${{ inputs.release_react }}
+        run: |
+          if [[ "$RELEASE_CORE" != "true" && \
+                "$RELEASE_SERVER" != "true" && \
+                "$RELEASE_REACT" != "true" ]]; then
+            echo "::error::No packages selected for release"
+            exit 1
+          fi
+          if [[ "$RELEASE_CORE" != "true" ]]; then
+            if [[ "$RELEASE_SERVER" == "true" || "$RELEASE_REACT" == "true" ]]; then
+              echo "::error::Cannot release server/react without core. Core must be included to ensure dependency versions are correct."
+              exit 1
+            fi
+          fi
+
+      - name: Bump versions
+        id: versions
+        env:
+          BUMP: ${{ inputs.bump }}
+          RELEASE_CORE: ${{ inputs.release_core }}
+          RELEASE_SERVER: ${{ inputs.release_server }}
+          RELEASE_REACT: ${{ inputs.release_react }}
+        run: |
+          if [[ "$RELEASE_CORE" == "true" ]]; then
+            cd packages/core
+            NEW_VERSION=$(npm version "$BUMP" --no-git-tag-version)
+            echo "core_version=${NEW_VERSION}" >> "$GITHUB_OUTPUT"
+            echo "Core bumped to ${NEW_VERSION}"
+            cd ../..
+          fi
+
+          if [[ "$RELEASE_SERVER" == "true" ]]; then
+            cd packages/server
+            NEW_VERSION=$(npm version "$BUMP" --no-git-tag-version)
+            echo "server_version=${NEW_VERSION}" >> "$GITHUB_OUTPUT"
+            echo "Server bumped to ${NEW_VERSION}"
+            cd ../..
+          fi
+
+          if [[ "$RELEASE_REACT" == "true" ]]; then
+            cd packages/react
+            NEW_VERSION=$(npm version "$BUMP" --no-git-tag-version)
+            echo "react_version=${NEW_VERSION}" >> "$GITHUB_OUTPUT"
+            echo "React bumped to ${NEW_VERSION}"
+            cd ../..
+          fi
+
+      - name: Update lockfile
+        run: pnpm install --no-frozen-lockfile
+
+      - name: Build
+        run: pnpm build
+
+      - name: Test
+        run: pnpm test
+
+      - name: Typecheck
+        run: pnpm typecheck
+
+      - name: Publish core
+        if: inputs.release_core
+        run: pnpm --filter @mondaycom/hatcha-core publish --no-git-checks --provenance
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Publish server
+        if: inputs.release_server
+        run: pnpm --filter @mondaycom/hatcha-server publish --no-git-checks --provenance
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Publish react
+        if: inputs.release_react
+        run: pnpm --filter @mondaycom/hatcha-react publish --no-git-checks --provenance
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Commit and tag
+        env:
+          CORE_VERSION: ${{ steps.versions.outputs.core_version }}
+          SERVER_VERSION: ${{ steps.versions.outputs.server_version }}
+          REACT_VERSION: ${{ steps.versions.outputs.react_version }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+          git add packages/*/package.json pnpm-lock.yaml
+
+          MSG="release:"
+          TAGS=()
+
+          if [[ -n "$CORE_VERSION" ]]; then
+            MSG="${MSG} core@${CORE_VERSION}"
+            TAGS+=("@mondaycom/hatcha-core@${CORE_VERSION}")
+          fi
+          if [[ -n "$SERVER_VERSION" ]]; then
+            MSG="${MSG} server@${SERVER_VERSION}"
+            TAGS+=("@mondaycom/hatcha-server@${SERVER_VERSION}")
+          fi
+          if [[ -n "$REACT_VERSION" ]]; then
+            MSG="${MSG} react@${REACT_VERSION}"
+            TAGS+=("@mondaycom/hatcha-react@${REACT_VERSION}")
+          fi
+
+          git commit -m "${MSG}"
+
+          for TAG in "${TAGS[@]}"; do
+            git tag "${TAG}"
+          done
+
+          git push origin HEAD --tags
+
+      - name: Create GitHub Releases
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          CORE_VERSION: ${{ steps.versions.outputs.core_version }}
+          SERVER_VERSION: ${{ steps.versions.outputs.server_version }}
+          REACT_VERSION: ${{ steps.versions.outputs.react_version }}
+        run: |
+          LAST_TAG=""
+
+          if [[ -n "$CORE_VERSION" ]]; then
+            LAST_TAG="@mondaycom/hatcha-core@${CORE_VERSION}"
+            gh release create "$LAST_TAG" \
+              --title "hatcha-core ${CORE_VERSION}" \
+              --generate-notes \
+              --latest=false
+          fi
+          if [[ -n "$SERVER_VERSION" ]]; then
+            LAST_TAG="@mondaycom/hatcha-server@${SERVER_VERSION}"
+            gh release create "$LAST_TAG" \
+              --title "hatcha-server ${SERVER_VERSION}" \
+              --generate-notes \
+              --latest=false
+          fi
+          if [[ -n "$REACT_VERSION" ]]; then
+            LAST_TAG="@mondaycom/hatcha-react@${REACT_VERSION}"
+            gh release create "$LAST_TAG" \
+              --title "hatcha-react ${REACT_VERSION}" \
+              --generate-notes \
+              --latest=false
+          fi
+
+          # Mark the last release as "Latest"
+          if [[ -n "$LAST_TAG" ]]; then
+            gh release edit "$LAST_TAG" --latest
+          fi
+
+      - name: Summary
+        env:
+          CORE_VERSION: ${{ steps.versions.outputs.core_version }}
+          SERVER_VERSION: ${{ steps.versions.outputs.server_version }}
+          REACT_VERSION: ${{ steps.versions.outputs.react_version }}
+        run: |
+          echo "## Release Summary" >> "$GITHUB_STEP_SUMMARY"
+          echo "" >> "$GITHUB_STEP_SUMMARY"
+          echo "| Package | Version |" >> "$GITHUB_STEP_SUMMARY"
+          echo "|---------|---------|" >> "$GITHUB_STEP_SUMMARY"
+          if [[ -n "$CORE_VERSION" ]]; then
+            echo "| @mondaycom/hatcha-core | ${CORE_VERSION} |" >> "$GITHUB_STEP_SUMMARY"
+          fi
+          if [[ -n "$SERVER_VERSION" ]]; then
+            echo "| @mondaycom/hatcha-server | ${SERVER_VERSION} |" >> "$GITHUB_STEP_SUMMARY"
+          fi
+          if [[ -n "$REACT_VERSION" ]]; then
+            echo "| @mondaycom/hatcha-react | ${REACT_VERSION} |" >> "$GITHUB_STEP_SUMMARY"
+          fi
