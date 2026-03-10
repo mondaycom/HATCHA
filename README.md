@@ -11,6 +11,10 @@
 
 ---
 
+<p align="center">
+  <img src="assets/hatcha-modal.png" alt="HATCHA modal in action" width="480" />
+</p>
+
 HATCHA (**H**yperfast **A**gent **T**est for **C**omputational **H**euristic **A**ssessment) is a reverse CAPTCHA that gates access behind challenges trivial for AI agents but painful for humans — large-number multiplication, string reversal, binary decoding, and more.
 
 - **Server-side verification** — answers never reach the client. HMAC-signed tokens, stateless, no database required.
