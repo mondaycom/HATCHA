@@ -20,15 +20,12 @@ importers:
 
   examples/nextjs-app:
     dependencies:
-      '@mondaycom/hatcha-core':
-        specifier: workspace:*
-        version: link:../../packages/core
       '@mondaycom/hatcha-react':
-        specifier: workspace:*
-        version: link:../../packages/react
+        specifier: ^0.1.1
+        version: 0.1.1(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
       '@mondaycom/hatcha-server':
-        specifier: workspace:*
-        version: link:../../packages/server
+        specifier: ^0.1.1
+        version: 0.1.1
       next:
         specifier: ^15
         version: 15.5.12(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
@@ -39,6 +36,9 @@ importers:
         specifier: ^19
         version: 19.2.4(react@19.2.4)
     devDependencies:
+      '@types/node':
+        specifier: ^22
+        version: 22.19.15
       '@types/react':
         specifier: ^19
         version: 19.2.14
@@ -410,6 +410,18 @@ packages:
   '@jridgewell/trace-mapping@0.3.31':
     resolution: {integrity: sha512-zzNR+SdQSDJzc8joaeP8QQoCQr8NuYx2dIIytl1QeBEZHJ9uW6hebsrYgbz8hJwUQao3TWCMtmfV8Nu1twOLAw==}
 
+  '@mondaycom/hatcha-core@0.1.1':
+    resolution: {integrity: sha512-+clmSgmXli+w5yL5c5qN7oosTobUqwnzUin7/Tn+D28d2sRogcrNwDVLtkACEtf8IL7xiJ5xlx33G8VHiqRBbw==}
+
+  '@mondaycom/hatcha-react@0.1.1':
+    resolution: {integrity: sha512-H2bbJwqVlMhJ62nMVw2nVRXVQDTySEBYpTQZ0NaC2wfqbCqBLgxGyvMKoAXGS5fCVGoNYLz5SEIQB1MmRae+IA==}
+    peerDependencies:
+      react: ^18 || ^19
+      react-dom: ^18 || ^19
+
+  '@mondaycom/hatcha-server@0.1.1':
+    resolution: {integrity: sha512-SI16JFK8UoR16IjGMmuICQXlDd3ueYnv2AzUeijoD4g2ilgFjn0GwPkcDhva57jklgLK/iFI2v6NRIVNzSGb/w==}
+
   '@next/env@15.5.12':
     resolution: {integrity: sha512-pUvdJN1on574wQHjaBfNGDt9Mz5utDSZFsIIQkMzPgNS8ZvT4H2mwOrOIClwsQOb6EGx5M76/CZr6G8i6pSpLg==}
 
@@ -615,6 +627,9 @@ packages:
 
   '@types/http-errors@2.0.5':
     resolution: {integrity: sha512-r8Tayk8HJnX0FztbZN7oVqGccWgw98T/0neJphO91KkmOzug1KkofZURD4UaD5uH8AqcFLfdPErnBod0u71/qg==}
+
+  '@types/node@22.19.15':
+    resolution: {integrity: sha512-F0R/h2+dsy5wJAUe3tAU6oqa2qbWY5TpNfL/RGmo1y38hiyO1w3x2jPtt76wmuaJI4DQnOBu21cNXQ2STIUUWg==}
 
   '@types/node@25.2.3':
     resolution: {integrity: sha512-m0jEgYlYz+mDJZ2+F4v8D1AyQb+QzsNqRuI7xg1VQX/KlKS0qT9r1Mo16yo5F/MtifXFgaofIFsdFMox2SxIbQ==}
@@ -1031,6 +1046,9 @@ packages:
   ufo@1.6.3:
     resolution: {integrity: sha512-yDJTmhydvl5lJzBmy/hyOAA0d+aqCBuwl818haVdYCRrWV84o7YyeVm4QlVHStqNrrJSTb6jKuFAVqAFsr+K3Q==}
 
+  undici-types@6.21.0:
+    resolution: {integrity: sha512-iwDZqg0QAGrg9Rav5H4n0M64c3mkR59cJ6wQp+7C4nI0gsmExaedaYLNO44eT4AtBBwjbTiGPMlt2Md0T9H9JQ==}
+
   undici-types@7.16.0:
     resolution: {integrity: sha512-Zz+aZWSj8LE6zoxD+xrjh4VfkIG8Ya6LvYkZqtUQGJPZjYl53ypCaUwWqo7eI0x66KBGeRo+mlBEkMSeSZ38Nw==}
 
@@ -1309,6 +1327,18 @@ snapshots:
       '@jridgewell/resolve-uri': 3.1.2
       '@jridgewell/sourcemap-codec': 1.5.5
 
+  '@mondaycom/hatcha-core@0.1.1': {}
+
+  '@mondaycom/hatcha-react@0.1.1(react-dom@19.2.4(react@19.2.4))(react@19.2.4)':
+    dependencies:
+      '@mondaycom/hatcha-core': 0.1.1
+      react: 19.2.4
+      react-dom: 19.2.4(react@19.2.4)
+
+  '@mondaycom/hatcha-server@0.1.1':
+    dependencies:
+      '@mondaycom/hatcha-core': 0.1.1
+
   '@next/env@15.5.12': {}
 
   '@next/swc-darwin-arm64@15.5.12':
@@ -1419,7 +1449,7 @@ snapshots:
   '@types/body-parser@1.19.6':
     dependencies:
       '@types/connect': 3.4.38
-      '@types/node': 25.2.3
+      '@types/node': 22.19.15
 
   '@types/chai@5.2.3':
     dependencies:
@@ -1428,7 +1458,7 @@ snapshots:
 
   '@types/connect@3.4.38':
     dependencies:
-      '@types/node': 25.2.3
+      '@types/node': 22.19.15
 
   '@types/deep-eql@4.0.2': {}
 
@@ -1436,7 +1466,7 @@ snapshots:
 
   '@types/express-serve-static-core@5.1.1':
     dependencies:
-      '@types/node': 25.2.3
+      '@types/node': 22.19.15
       '@types/qs': 6.14.0
       '@types/range-parser': 1.2.7
       '@types/send': 1.2.1
@@ -1449,9 +1479,14 @@ snapshots:
 
   '@types/http-errors@2.0.5': {}
 
+  '@types/node@22.19.15':
+    dependencies:
+      undici-types: 6.21.0
+
   '@types/node@25.2.3':
     dependencies:
       undici-types: 7.16.0
+    optional: true
 
   '@types/qs@6.14.0': {}
 
@@ -1467,12 +1502,12 @@ snapshots:
 
   '@types/send@1.2.1':
     dependencies:
-      '@types/node': 25.2.3
+      '@types/node': 22.19.15
 
   '@types/serve-static@2.2.0':
     dependencies:
       '@types/http-errors': 2.0.5
-      '@types/node': 25.2.3
+      '@types/node': 22.19.15
 
   '@vitest/expect@4.0.18':
     dependencies:
@@ -1879,7 +1914,10 @@ snapshots:
 
   ufo@1.6.3: {}
 
-  undici-types@7.16.0: {}
+  undici-types@6.21.0: {}
+
+  undici-types@7.16.0:
+    optional: true
 
   vite@7.3.1(@types/node@25.2.3):
     dependencies:
