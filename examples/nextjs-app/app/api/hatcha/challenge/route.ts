@@ -1,4 +1,4 @@
-import { createChallenge } from "@mondaydotcomorg/hatcha-core";
+import { createChallenge } from "@mondaycom/hatcha-core";
 
 export async function GET() {
   const payload = await createChallenge({

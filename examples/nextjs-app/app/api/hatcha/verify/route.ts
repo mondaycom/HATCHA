@@ -1,4 +1,4 @@
-import { verifyAnswer } from "@mondaydotcomorg/hatcha-core";
+import { verifyAnswer } from "@mondaycom/hatcha-core";
 
 export async function POST(request: Request) {
   const body = await request.json();

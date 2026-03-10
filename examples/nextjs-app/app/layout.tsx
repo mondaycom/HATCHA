@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
-import { HatchaProvider } from "@mondaydotcomorg/hatcha-react";
-import "@mondaydotcomorg/hatcha-react/styles.css";
+import { HatchaProvider } from "@mondaycom/hatcha-react";
+import "@mondaycom/hatcha-react/styles.css";
 import "./globals.css";
 
 export const metadata: Metadata = {

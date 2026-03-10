@@ -8,9 +8,9 @@
     "start": "next start"
   },
   "dependencies": {
-    "@mondaydotcomorg/hatcha-core": "workspace:*",
-    "@mondaydotcomorg/hatcha-react": "workspace:*",
-    "@mondaydotcomorg/hatcha-server": "workspace:*",
+    "@mondaycom/hatcha-core": "workspace:*",
+    "@mondaycom/hatcha-react": "workspace:*",
+    "@mondaycom/hatcha-server": "workspace:*",
     "next": "^15",
     "react": "^19",
     "react-dom": "^19"

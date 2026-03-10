@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { useHatcha } from "@mondaydotcomorg/hatcha-react";
+import { useHatcha } from "@mondaycom/hatcha-react";
 
 export default function Home() {
   const { requestVerification } = useHatcha();
