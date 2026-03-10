@@ -1,5 +1,5 @@
 {
-  "name": "@mondaydotcomorg/hatcha-react",
+  "name": "@mondaycom/hatcha-react",
   "version": "0.1.0",
   "description": "React component for HATCHA — reverse CAPTCHA for agents",
   "type": "module",
@@ -24,7 +24,7 @@
     "clean": "rm -rf dist"
   },
   "dependencies": {
-    "@mondaydotcomorg/hatcha-core": "workspace:*"
+    "@mondaycom/hatcha-core": "workspace:*"
   },
   "peerDependencies": {
     "react": "^18 || ^19",

@@ -10,7 +10,7 @@ import {
  * Usage:
  *
  *   import express from "express";
- *   import { hatchaRouter } from "@mondaydotcomorg/hatcha-server/express";
+ *   import { hatchaRouter } from "@mondaycom/hatcha-server/express";
  *
  *   const app = express();
  *   app.use(express.json());

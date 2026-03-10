@@ -2,7 +2,7 @@ import {
   createChallenge,
   verifyAnswer,
   type HatchaConfig,
-} from "@mondaydotcomorg/hatcha-core";
+} from "@mondaycom/hatcha-core";
 
 export interface HatchaServerConfig {
   /** HMAC secret for signing challenge tokens. */

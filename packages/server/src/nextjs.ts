@@ -9,7 +9,7 @@ import {
  *
  * Usage (app/api/hatcha/[...hatcha]/route.ts):
  *
- *   import { createHatchaHandler } from "@mondaydotcomorg/hatcha-server/nextjs";
+ *   import { createHatchaHandler } from "@mondaycom/hatcha-server/nextjs";
  *
  *   const handler = createHatchaHandler({
  *     secret: process.env.HATCHA_SECRET!,
