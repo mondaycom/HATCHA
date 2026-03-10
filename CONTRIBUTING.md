@@ -65,7 +65,7 @@ pnpm test
 ## Code Style
 
 - TypeScript throughout, strict mode.
-- No external runtime dependencies in `@hatcha/core`.
+- No external runtime dependencies in `@mondaycom/hatcha-core`.
 - Keep bundle sizes minimal — the library should stay lightweight.
 
 ## License

@@ -4,7 +4,7 @@
 </p>
 
 <p align="center">
-  <a href="https://www.npmjs.com/package/@mondaydotcomorg/hatcha-core"><img src="https://img.shields.io/npm/v/@mondaydotcomorg/hatcha-core" alt="npm" /></a>
+  <a href="https://www.npmjs.com/package/@mondaycom/hatcha-core"><img src="https://img.shields.io/npm/v/@mondaycom/hatcha-core" alt="npm" /></a>
   <a href="./LICENSE"><img src="https://img.shields.io/badge/license-MIT-blue" alt="License" /></a>
   <a href="https://github.com/mondaycom/HATCHA/actions"><img src="https://github.com/mondaycom/HATCHA/actions/workflows/ci.yml/badge.svg" alt="CI" /></a>
 </p>
@@ -28,14 +28,14 @@ HATCHA (**H**yperfast **A**gent **T**est for **C**omputational **H**euristic **A
 ### 1. Install
 
 ```bash
-npm install @mondaydotcomorg/hatcha-react @mondaydotcomorg/hatcha-server
+npm install @mondaycom/hatcha-react @mondaycom/hatcha-server
 ```
 
 ### 2. Add the API route
 
 ```typescript
 // app/api/hatcha/[...hatcha]/route.ts
-import { createHatchaHandler } from "@mondaydotcomorg/hatcha-server/nextjs";
+import { createHatchaHandler } from "@mondaycom/hatcha-server/nextjs";
 
 const handler = createHatchaHandler({
   secret: process.env.HATCHA_SECRET!,
@@ -49,8 +49,8 @@ export const POST = handler;
 
 ```tsx
 // app/layout.tsx
-import { HatchaProvider } from "@mondaydotcomorg/hatcha-react";
-import "@mondaydotcomorg/hatcha-react/styles.css";
+import { HatchaProvider } from "@mondaycom/hatcha-react";
+import "@mondaycom/hatcha-react/styles.css";
 
 export default function RootLayout({ children }) {
   return (
@@ -67,7 +67,7 @@ export default function RootLayout({ children }) {
 
 ```tsx
 "use client";
-import { useHatcha } from "@mondaydotcomorg/hatcha-react";
+import { useHatcha } from "@mondaycom/hatcha-react";
 
 function AgentModeButton() {
   const { requestVerification } = useHatcha();
@@ -133,7 +133,7 @@ The answer **never** reaches the client. The signed token is opaque and contains
 ## Custom challenges
 
 ```typescript
-import { registerChallenge } from "@mondaydotcomorg/hatcha-server";
+import { registerChallenge } from "@mondaycom/hatcha-server";
 
 registerChallenge({
   type: "hex",
@@ -176,7 +176,7 @@ Pass `theme="dark"`, `theme="light"`, or `theme="auto"` to `<HatchaProvider>` or
 
 ```typescript
 import express from "express";
-import { hatchaRouter } from "@mondaydotcomorg/hatcha-server/express";
+import { hatchaRouter } from "@mondaycom/hatcha-server/express";
 
 const app = express();
 app.use(express.json());
@@ -189,9 +189,9 @@ app.listen(3000);
 
 | Package | Description |
 |---------|-------------|
-| [`@mondaydotcomorg/hatcha-core`](./packages/core) | Challenge generation and cryptographic verification |
-| [`@mondaydotcomorg/hatcha-react`](./packages/react) | React component, provider, and styles |
-| [`@mondaydotcomorg/hatcha-server`](./packages/server) | Next.js and Express server handlers |
+| [`@mondaycom/hatcha-core`](./packages/core) | Challenge generation and cryptographic verification |
+| [`@mondaycom/hatcha-react`](./packages/react) | React component, provider, and styles |
+| [`@mondaycom/hatcha-server`](./packages/server) | Next.js and Express server handlers |
 
 ## Development
 
